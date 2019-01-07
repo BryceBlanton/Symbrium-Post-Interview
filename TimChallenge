@@ -1,1 +1,99 @@
 
+using System;
+
+public class Program
+{
+	public static void Main()
+	{
+		string choice = "1";
+		Console.WriteLine("This program can do the FizzBuzz Challenge and the Date time challenge");
+		
+		
+		while(choice != "0"){
+		Console.WriteLine();
+		Console.Write("Enter 1 for FizzBuzz or 2 for DateTime to exit Enter 0: ");
+		choice = Console.ReadLine();
+		if(choice == "1"){
+		Console.WriteLine();
+			
+		Console.Write("Enter any number to be the begging of FizzBuzz: ");
+		string begin = Console.ReadLine();
+		Console.Write("Enter any number to be the end of FizzBuzz: ");
+		string d = Console.ReadLine();
+			
+		int beginNum = Int32.Parse(begin);
+		int endNum = Int32.Parse(d);
+			
+		for(int i = beginNum; i <= endNum; i++){
+			
+			if(i==0){
+				Console.WriteLine("Busted! Can't test against 0");
+			}else if(i%3==0 && i%5==0){
+				Console.WriteLine("FizzBuzz");
+			}
+			else if(i%3==0){
+				Console.WriteLine("Fizz");
+			}else if(i%5==0){
+				Console.WriteLine("Buzz");
+			}else if(i%7==0){
+				Console.WriteLine("Jazz");
+			}else{
+			Console.WriteLine(i);
+			}
+		}
+		}
+		
+		/* Date Time Challenge*/
+		
+		/* Date cal*/
+		
+		if(choice == "2"){
+			string dateString;
+			
+			/*Get the user data*/
+			Console.Write("Enter a Date in MM/DD/YYYY format: ");
+			dateString = Console.ReadLine();
+			Console.WriteLine("You entered '{0}'", dateString);
+			
+			/*getting into usable data type*/
+			DateTime startDate = DateTime.Parse(dateString);
+			
+			/*get today*/
+			DateTime today = DateTime.Now;
+		
+			/*calculating number of days*/
+			TimeSpan days = today.Subtract(startDate);
+					
+			/*Printing out*/
+			double daysAgo = days.TotalDays;//This just takes away the decimals which does make it have a rounding error some
+			if(daysAgo < 0){
+				Console.WriteLine("There are '{0}' days until '{1}'",daysAgo.ToString("0"),dateString);
+			}else Console.WriteLine("It has been '{0}' days since '{1}'",daysAgo.ToString("0"),dateString);
+		
+		
+		
+		
+		/*Time cal*/
+			
+			string timeString;
+			
+			/*Get the user data*/
+			Console.Write("Enter a time: ");
+			timeString = Console.ReadLine();
+			Console.WriteLine("You entered '{0}'", timeString);
+		
+			var timeNow = DateTime.UtcNow;
+			TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+			DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
+			DateTime startTime = DateTime.Parse(timeString);
+		
+			Console.WriteLine("Difference between {0} and {1} time: {2}:{3} hours", 
+							startTime.Kind.ToString(), 
+							easternTime.Kind.ToString(), 
+							(easternTime - startTime).Hours, 
+							(easternTime - startTime).Minutes);
+
+		}//Close DateTime IF
+		}//Close Global WHILE
+	}
+}
