@@ -2,11 +2,11 @@
 A github repo to house the C# code written to show adaptation skills. Here are the descriptions of the two chalenges I did.
 
 # FizzBuzz
-1. Print Fizz when a number is divisable by 3
-2. Print Buzz when a number is divisable by 5
-3. Print FizzBuzz when a number is divisable by 3 and 5
+1. Print Fizz when a number is divisible by 3
+2. Print Buzz when a number is divisible by 5
+3. Print FizzBuzz when a number is divisible by 3 and 5
 4. Make it only perform each division once????
-5. Print Jazz when a number is divisable by 7
+5. Print Jazz when a number is divisible by 7
 6. Make the numeric range chose by the user
 7. Let the user add more rules and rank them
 
