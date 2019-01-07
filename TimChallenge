@@ -86,7 +86,7 @@ public class Program
 				string timeString;
 
 				/*Get the user data*/
-				Console.Write("Enter a time: ");
+				Console.Write("Enter a time (don't forget the am or pm if using 12hr format): ");
 				timeString = Console.ReadLine();
 				Console.WriteLine("You entered '{0}'", timeString);
 
@@ -97,11 +97,18 @@ public class Program
 				DateTime startTime = DateTime.Parse(timeString);
 				string milT = easternTime.ToString("hh:mm");
 			
-					
+				if((easternTime - startTime).Hours > 0 | (easternTime - startTime).Minutes > 0){
 				Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", 
 								timeString, milT, 
 								(easternTime - startTime).Hours, (easternTime - startTime).Minutes);
 
+				}//Close the negative test IF
+					else{
+						var hrs = Math.Abs((easternTime - startTime).Hours);
+					 	var mins = Math.Abs((easternTime - startTime).Minutes);
+						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", 
+								timeString, milT, hrs, mins);
+					}
 				}/*Close timeChoice IF*/ else{
 				DateTime TF = Convert.ToDateTime(timeString);
 				
@@ -114,9 +121,14 @@ public class Program
 					
 				string mil = TF.ToString("HH:mm");
 				string milT = easternTime.ToString("HH:mm");
-							
-				Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ",hrs,mins,mil,milT);
 					
+				if(hrs > 0 | mins > 0){
+				Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ",hrs,mins,mil,milT);
+				} else {
+					hrs = Math.Abs(hrs);
+					mins = Math.Abs(mins);
+					Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ",hrs,mins,mil,milT);
+				}
 				}
 				
 			}//Close DateTime IF
