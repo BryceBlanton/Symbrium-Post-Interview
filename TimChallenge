@@ -6,134 +6,137 @@ public class Program
 	{
 		string choice = "1";
 		Console.WriteLine("This program can do the FizzBuzz Challenge and the Date time challenge");
-		
-		
-		while(choice != "0"){
+		while (choice != "0")
+		{
 			Console.WriteLine();
 			Console.Write("Enter 1 for FizzBuzz or 2 for DateTime to exit Enter 0: ");
 			choice = Console.ReadLine();
-
 			///////////FIZZBUZZ/////////////////////////////////////////////////////////////////////////////	
-
-			if(choice == "1"){
+			if (choice == "1")
+			{
 				Console.WriteLine();
 				Console.WriteLine("Enter any number to be the begging of FizzBuzz: ");
 				string begin = Console.ReadLine();
 				Console.WriteLine("Enter any number to be the end of FizzBuzz: ");
 				string d = Console.ReadLine();
-
 				int beginNum = Int32.Parse(begin);
 				int endNum = Int32.Parse(d);
-				Console.WriteLine("-------------------------------------");
-
-				for(int i = beginNum; i <= endNum; i++){
-
-					if(i==0){
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+				for (int i = beginNum; i <= endNum; i++)
+				{
+					if (i == 0)
+					{
 						Console.WriteLine("Busted! Can't test against 0");
-					}else if(i%3==0 && i%5==0){
+					}
+					else if (i % 3 == 0 && i % 5 == 0)
+					{
 						Console.WriteLine("FizzBuzz");
 					}
-					else if(i%3==0){
+					else if (i % 3 == 0)
+					{
 						Console.WriteLine("Fizz");
-					}else if(i%5==0){
+					}
+					else if (i % 5 == 0)
+					{
 						Console.WriteLine("Buzz");
-					}else if(i%7==0){
+					}
+					else if (i % 7 == 0)
+					{
 						Console.WriteLine("Jazz");
-					}else{
+					}
+					else
+					{
 						Console.WriteLine(i);
 					}
-				}//End FOR
-				Console.WriteLine("-------------------------------------");
-			}//End IF
+				} //End FOR
+
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+			} //End IF
 
 			///////////DATETIME/////////////////////////////////////////////////////////////////////////////
-
-			/* Date cal*///////////////////////////
-
-			if(choice == "2"){
+			/* Date cal*/
+			//////////////////////////
+			if (choice == "2")
+			{
 				string dateString;
-								
 				/*Get the user data*/
 				Console.Write("Enter a Date: ");
 				dateString = Console.ReadLine();
-				Console.WriteLine("-------------------------------------");
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				Console.WriteLine("You entered '{0}'", dateString);
-				
 				/*getting into usable data type*/
 				DateTime startDate = DateTime.Parse(dateString);
-
 				/*get today*/
 				DateTime today = DateTime.Now;
-
 				/*calculating number of days*/
 				TimeSpan days = today.Subtract(startDate);
-
 				/*Printing out*/
-				double daysAgo = days.TotalDays;//This just takes away the decimals which does make it have a rounding error some
-				Console.WriteLine("-------------------------------------");
-				if(daysAgo < 0){
+				double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+				if (daysAgo < 0)//Checking for past/future
+				{
 					daysAgo = Math.Abs(daysAgo);
-					Console.WriteLine("There are '{0}' days until '{1}'",daysAgo.ToString("0"),dateString);
-				}else Console.WriteLine("It has been '{0}' days since '{1}'",daysAgo.ToString("0"),dateString);
+					Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), dateString);
+				}
+				else
+					Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				
-				Console.WriteLine("-------------------------------------");
 				
-			/*Time cal*////////////////////////////
-				
+				/*Time cal*/
+				///////////////////////////
 				Console.WriteLine("Enter 12 to use 12hr format and 24 to use the 24hr format: ");
 				String timeChoice = Console.ReadLine();
-				
 				string timeString;
-
 				/*Get the user data*/
 				Console.Write("Enter a time (don't forget the am or pm if using 12hr format): ");
 				timeString = Console.ReadLine();
 				Console.WriteLine("You entered '{0}'", timeString);
-
-				if(timeChoice == "12"){
-				var timeNow = DateTime.UtcNow;
-				TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-				DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
-				DateTime startTime = DateTime.Parse(timeString);
-				string milT = easternTime.ToString("hh:mm");
-			
-				if((easternTime - startTime).Hours > 0 | (easternTime - startTime).Minutes > 0){
-				Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", 
-								timeString, milT, 
-								(easternTime - startTime).Hours, (easternTime - startTime).Minutes);
-
-				}//Close the negative test IF
-					else{
+				if (timeChoice == "12")
+				{
+					var timeNow = DateTime.UtcNow;
+					TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+					DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
+					DateTime startTime = DateTime.Parse(timeString);
+					string milT = easternTime.ToString("hh:mm");
+					if ((easternTime - startTime).Hours > 0 | (easternTime - startTime).Minutes > 0)//Checking for past/future
+					{
+						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", timeString, milT, (easternTime - startTime).Hours, (easternTime - startTime).Minutes);
+					} //Close the negative test IF
+					else
+					{
 						var hrs = Math.Abs((easternTime - startTime).Hours);
-					 	var mins = Math.Abs((easternTime - startTime).Minutes);
-						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", 
-								timeString, milT, hrs, mins);
+						var mins = Math.Abs((easternTime - startTime).Minutes);
+						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", timeString, milT, hrs, mins);
 					}
-				}/*Close timeChoice IF*/ else{
-				DateTime TF = Convert.ToDateTime(timeString);
+				} /*Close timeChoice IF*/
 				
-				var timeNow = DateTime.UtcNow;
-				TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-				DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
+				/*This is messy casue I was just tryin to hack it out haven't come back through to clean it up yet*/
 				
-				var	hrs = (easternTime - TF).Hours;
-				var mins = (easternTime - TF).Minutes;
-					
-				string mil = TF.ToString("HH:mm");
-				string milT = easternTime.ToString("HH:mm");
-					
-				if(hrs > 0 | mins > 0){
-				Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ",hrs,mins,mil,milT);
-				} else {
-					hrs = Math.Abs(hrs);
-					mins = Math.Abs(mins);
-					Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ",hrs,mins,mil,milT);
+				else
+				{
+					DateTime TF = Convert.ToDateTime(timeString);
+					var timeNow = DateTime.UtcNow;
+					TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+					DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
+					var hrs = (easternTime - TF).Hours;
+					var mins = (easternTime - TF).Minutes;
+					string mil = TF.ToString("HH:mm");
+					string milT = easternTime.ToString("HH:mm");
+					if (hrs > 0 | mins > 0)//Checking for past/future
+					{
+						Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ", hrs, mins, mil, milT);
+					}
+					else
+					{
+						hrs = Math.Abs(hrs);
+						mins = Math.Abs(mins);
+						Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ", hrs, mins, mil, milT);
+					}
 				}
-				}
-				
-			}//Close DateTime IF
-				
-		}//Close Global WHILE
+			} //Close DateTime IF
+		} //Close Global WHILE
+
 		Console.Write("----------ENDED----------");
 	}
 }
