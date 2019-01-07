@@ -1,5 +1,5 @@
 # Symbrium-Post-Interview
-A github repo to house the C# code written to show adaptation skills. Here are the descriptions of the two chalenges I did.
+A github repo to house the C# code written to show adaptation skills. Here are the descriptions of the two chalenges I did. I used https://dotnetfiddle.net/ to be able to work on this project anywhere.
 
 # FizzBuzz
 1. Print Fizz when a number is divisible by 3
