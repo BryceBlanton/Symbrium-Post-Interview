@@ -6,6 +6,7 @@ public class Program
 	public static void Main()
 	{
 		string choice = "1";
+		string fizzChoice = "3";
 		Console.WriteLine("This program can do the FizzBuzz Challenge and the Date time challenge");
 		while (choice != "0")
 		{
@@ -15,6 +16,13 @@ public class Program
 			///////////FIZZBUZZ/////////////////////////////////////////////////////////////////////////////	
 			if (choice == "1")
 			{
+				while (fizzChoice != "2") {
+				Console.WriteLine();
+				Console.Write("Enter 1 to add a new rule and 2 to exit FizzBuzz and 3 to skip: ");
+				fizzChoice = Console.ReadLine();
+				
+				
+					
 				Console.WriteLine();
 				Console.WriteLine("Enter any number to be the begging of FizzBuzz: ");
 				string begin = Console.ReadLine();
@@ -50,7 +58,7 @@ public class Program
 						Console.WriteLine(i);
 					}
 				} //End FOR
-
+				}//END fizzchoice WHILE
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 			} //End IF
 
@@ -71,12 +79,14 @@ public class Program
 				if(dateChoice == "1"){
 				/*getting into usable data type*/
 				DateTime startDate = DateTime.Parse(dateString);
+				
 				/*get today*/
 				DateTime today = DateTime.Now;
 				/*calculating number of days*/
 				TimeSpan days = today.Subtract(startDate);
 				/*Printing out*/
 				double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
+				
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				if (daysAgo < 0)//Checking for past/future
 				{
@@ -89,12 +99,14 @@ public class Program
 				CultureInfo provider = CultureInfo.InvariantCulture;
 				provider = new CultureInfo("fr-FR");
 				DateTime startDate = DateTime.ParseExact(dateString, "d", provider);
-					/*get today*/
+				
+				/*get today*/
 				DateTime today = DateTime.Now;
 				/*calculating number of days*/
 				TimeSpan days = today.Subtract(startDate);
 				/*Printing out*/
 				double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
+				
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				if (daysAgo < 0)//Checking for past/future
 				{
