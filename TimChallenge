@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 
 public class Program
 {
@@ -58,12 +59,16 @@ public class Program
 			//////////////////////////
 			if (choice == "2")
 			{
+				Console.WriteLine("Enter 1 for mm/dd/yyyy and 2 for dd/mm/yyyy: ");
+				String dateChoice = Console.ReadLine();
+				
 				string dateString;
 				/*Get the user data*/
 				Console.Write("Enter a Date: ");
 				dateString = Console.ReadLine();
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				Console.WriteLine("You entered '{0}'", dateString);
+				if(dateChoice == "1"){
 				/*getting into usable data type*/
 				DateTime startDate = DateTime.Parse(dateString);
 				/*get today*/
@@ -78,10 +83,27 @@ public class Program
 					daysAgo = Math.Abs(daysAgo);
 					Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), dateString);
 				}
-				else
-					Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
+				else Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-				
+				}else {
+				CultureInfo provider = CultureInfo.InvariantCulture;
+				provider = new CultureInfo("fr-FR");
+				DateTime startDate = DateTime.ParseExact(dateString, "d", provider);
+					/*get today*/
+				DateTime today = DateTime.Now;
+				/*calculating number of days*/
+				TimeSpan days = today.Subtract(startDate);
+				/*Printing out*/
+				double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+				if (daysAgo < 0)//Checking for past/future
+				{
+					daysAgo = Math.Abs(daysAgo);
+					Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), dateString);
+				}
+				else Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
+				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+				}
 				
 				/*Time cal*/
 				///////////////////////////
