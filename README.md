@@ -17,5 +17,5 @@ A github repo to house the C# code written to show adaptation skills. Here are t
 3. Take a time input by the user-----------------------------------DONE
 4. Calculate how many hours and min ago it was---------------------DONE
 5. Allow 12hr or 24hr format---------------------------------------DONE
-6. Allow MM/DD/YYYY or DD/MM/YYYY 
+6. Allow MM/DD/YYYY or DD/MM/YYYY----------------------------------DONE
 7. No longer can assume the user will put in a past date/time------DONE
