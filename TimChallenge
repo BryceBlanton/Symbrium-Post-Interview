@@ -18,41 +18,29 @@ public class Program
 				Console.WriteLine();
 				Console.WriteLine("Enter any number to be the begging of FizzBuzz: ");
 				string begin = Console.ReadLine();
+				//READ IN user data
 				Console.WriteLine("Enter any number to be the end of FizzBuzz: ");
 				string d = Console.ReadLine();
-				int beginNum = Int32.Parse(begin);
-				int endNum = Int32.Parse(d);
-				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-				for (int i = beginNum; i <= endNum; i++)
+				//READ IN user data
+				int beginNum = 0;
+				int endNum = 0;
+				try
 				{
-					if (i == 0)
-					{
-						Console.WriteLine("Busted! Can't test against 0");
-					}
-					else if (i % 3 == 0 && i % 5 == 0)
-					{
-						Console.WriteLine("FizzBuzz");
-					}
-					else if (i % 3 == 0)
-					{
-						Console.WriteLine("Fizz");
-					}
-					else if (i % 5 == 0)
-					{
-						Console.WriteLine("Buzz");
-					}
-					else if (i % 7 == 0)
-					{
-						Console.WriteLine("Jazz");
-					}
-					else
-					{
-						Console.WriteLine(i);
-					}
-				} //End FOR
-
+					beginNum = Int32.Parse(begin);
+					endNum = Int32.Parse(d);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES",e);
+				}
+				//Parse string into int
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-			} //End IF
+				//Call FizzBuzz
+				Fizz Fizz1 = new Fizz();
+				Fizz1.setbeginNum(beginNum);
+				Fizz1.setendNum(endNum);
+				Fizz1.fizzCylce();
+			}
 
 			///////////DATETIME/////////////////////////////////////////////////////////////////////////////
 			/* Date cal*/
@@ -62,55 +50,26 @@ public class Program
 				Console.WriteLine("Enter 1 for mm/dd/yyyy and 2 for dd/mm/yyyy: ");
 				String dateChoice = Console.ReadLine();
 				string dateString;
-				/*Get the user data*/
 				Console.Write("Enter a Date: ");
 				dateString = Console.ReadLine();
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+				Console.WriteLine();
 				Console.WriteLine("You entered '{0}'", dateString);
+				/*Get the user data*/
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 				if (dateChoice == "1")
 				{
-					/*getting into usable data type*/
-					DateTime startDate = DateTime.Parse(dateString);
-					/*get today*/
-					DateTime today = DateTime.Now;
-					/*calculating number of days*/
-					TimeSpan days = today.Subtract(startDate);
-					/*Printing out*/
-					double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
-					Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-					if (daysAgo < 0) //Checking for past/future
-					{
-						daysAgo = Math.Abs(daysAgo);
-						Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), dateString);
-					}
-					else
-						Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
-					Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+					Date Date1 = new Date();
+					Date1.dateCalc(dateString, "en-US");
 				}
 				else
 				{
-					CultureInfo provider = CultureInfo.InvariantCulture;
-					provider = new CultureInfo("fr-FR");
-					DateTime startDate = DateTime.ParseExact(dateString, "d", provider);
-					/*get today*/
-					DateTime today = DateTime.Now;
-					/*calculating number of days*/
-					TimeSpan days = today.Subtract(startDate);
-					/*Printing out*/
-					double daysAgo = days.TotalDays; //This just takes away the decimals which does make it have a rounding error some
-					Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
-					if (daysAgo < 0) //Checking for past/future
-					{
-						daysAgo = Math.Abs(daysAgo);
-						Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), dateString);
-					}
-					else
-						Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), dateString);
-					Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+					Date Date1 = new Date();
+					Date1.dateCalc(dateString, "fr-FR");
 				}
 
 				/*Time cal*/
-				///////////////////////////
+				///////////////////////////////////////////////////////////////////////////////////
 				Console.WriteLine("Enter 12 to use 12hr format and 24 to use the 24hr format: ");
 				String timeChoice = Console.ReadLine();
 				string timeString;
@@ -118,49 +77,125 @@ public class Program
 				Console.Write("Enter a time (don't forget the am or pm if using 12hr format): ");
 				timeString = Console.ReadLine();
 				Console.WriteLine("You entered '{0}'", timeString);
+				//Getting user input
+				/////////////////////////////////////////////////////////////////////////////////
 				if (timeChoice == "12")
 				{
-					var timeNow = DateTime.UtcNow;
-					TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-					DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
-					DateTime startTime = DateTime.Parse(timeString);
-					string milT = easternTime.ToString("hh:mm");
-					if ((easternTime - startTime).Hours > 0 | (easternTime - startTime).Minutes > 0) //Checking for past/future
-					{
-						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", timeString, milT, (easternTime - startTime).Hours, (easternTime - startTime).Minutes);
-					} //Close the negative test IF
-					else
-					{
-						var hrs = Math.Abs((easternTime - startTime).Hours);
-						var mins = Math.Abs((easternTime - startTime).Minutes);
-						Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", timeString, milT, hrs, mins);
-					}
+					Time Time1 = new Time();
+					Time1.timeCalc(timeString);
 				} /*Close timeChoice IF*/
 				/*This is messy casue I was just tryin to hack it out haven't come back through to clean it up yet*/
 				else
 				{
-					DateTime TF = Convert.ToDateTime(timeString);
-					var timeNow = DateTime.UtcNow;
-					TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
-					DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
-					var hrs = (easternTime - TF).Hours;
-					var mins = (easternTime - TF).Minutes;
-					string mil = TF.ToString("HH:mm");
-					string milT = easternTime.ToString("HH:mm");
-					if (hrs > 0 | mins > 0) //Checking for past/future
-					{
-						Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ", hrs, mins, mil, milT);
-					}
-					else
-					{
-						hrs = Math.Abs(hrs);
-						mins = Math.Abs(mins);
-						Console.WriteLine("Differnce between {2} and {3} is {0}hrs:{1}mins ", hrs, mins, mil, milT);
-					}
+					Time Time2 = new Time();
+					Time2.timeCalc(timeString);
 				}
 			} //Close DateTime IF
 		} //Close Global WHILE
 
 		Console.Write("----------ENDED----------");
+	}
+}
+
+class Fizz
+{
+	private int beginNum;
+	private int endNum;
+	//Getting and setting the values I need from the user
+	public void setbeginNum(int beNum)
+	{
+		beginNum = beNum;
+	}
+
+	public void setendNum(int ndNum)
+	{
+		endNum = ndNum;
+	}
+
+	//the actual FizzBuzz code, I used the mod operator because it was the first and
+	//most simple solution that seemed like it followed the rules laid out by Tim
+	public string fizzCylce()
+	{
+		for (int i = beginNum; i <= endNum; i++)
+		{
+			if (i == 0)
+			{
+				Console.WriteLine("Busted! Can't test against 0");
+			}
+			else if (i % 3 == 0 && i % 5 == 0)
+			{
+				Console.WriteLine("FizzBuzz");
+			}
+			else if (i % 3 == 0)
+			{
+				Console.WriteLine("Fizz");
+			}
+			else if (i % 5 == 0)
+			{
+				Console.WriteLine("Buzz");
+			}
+			else if (i % 7 == 0)
+			{
+				Console.WriteLine("Jazz");
+			}
+			else
+			{
+				Console.WriteLine(i);
+			}
+		}
+
+		return "FINISHED!!";
+	}
+}
+
+class Date
+{
+	public string dateCalc(string userDate, string culture)
+	{
+		CultureInfo provider = CultureInfo.InvariantCulture;
+		provider = new CultureInfo(culture);
+		DateTime startDate = DateTime.ParseExact(userDate, "d", provider);
+		/*get today*/
+		DateTime today = DateTime.Now;
+		/*calculating number of days*/
+		TimeSpan days = today.Subtract(startDate);
+		/*Printing out*/
+		double daysAgo = days.Days; //This just takes away the decimals which does make it have a rounding error some
+		Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+		Console.WriteLine();
+		if (daysAgo < 0) //Checking for past/future
+		{
+			daysAgo = Math.Abs(daysAgo);
+			Console.WriteLine("There are '{0}' days until '{1}'", daysAgo.ToString("0"), userDate);
+		}
+		else
+			Console.WriteLine("It has been '{0}' days since '{1}'", daysAgo.ToString("0"), userDate);
+		Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
+		Console.WriteLine();
+		return "FINISHED!!";
+	}
+}
+
+class Time
+{
+	public string timeCalc(string start)
+	{
+		var timeNow = DateTime.UtcNow;
+		TimeZoneInfo easternZone = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+		DateTime easternTime = TimeZoneInfo.ConvertTimeFromUtc(timeNow, easternZone);
+		DateTime userTime = DateTime.Parse(start);
+		string milT = easternTime.ToString("hh:mm");
+		if ((easternTime - userTime).Hours > 0 | (easternTime - userTime).Minutes > 0) //Checking for past/future
+		{
+			Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", userTime, milT, (easternTime - userTime).Hours, (easternTime - userTime).Minutes);
+		} //Close the negative test IF
+		else
+		{
+			var hrs = Math.Abs((easternTime - userTime).Hours);
+			var mins = Math.Abs((easternTime - userTime).Minutes);
+			Console.WriteLine("Difference between {0} and {1} time: {2}hrs:{3}mins", userTime, milT, hrs, mins);
+		}
+
+		return "FINISHED!!";
 	}
 }
