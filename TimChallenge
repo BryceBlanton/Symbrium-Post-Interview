@@ -7,6 +7,7 @@ public class Program
 	{
 		string choice = "1";
 		Console.WriteLine("This program can do the FizzBuzz Challenge and the Date time challenge");
+		int loopCount = 0;
 		while (choice != "0")
 		{
 			Console.WriteLine();
@@ -31,15 +32,23 @@ public class Program
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES",e);
+					Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
 				}
+
 				//Parse string into int
 				Console.WriteLine("---------------------------------------------------------------------------------------------------------------");
 				//Call FizzBuzz
 				Fizz Fizz1 = new Fizz();
 				Fizz1.setbeginNum(beginNum);
 				Fizz1.setendNum(endNum);
-				Fizz1.fizzCylce();
+				try
+				{
+					Fizz1.fizzCylce();
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
+				}
 			}
 
 			///////////DATETIME/////////////////////////////////////////////////////////////////////////////
@@ -60,12 +69,26 @@ public class Program
 				if (dateChoice == "1")
 				{
 					Date Date1 = new Date();
-					Date1.dateCalc(dateString, "en-US");
+					try
+					{
+						Date1.dateCalc(dateString, "en-US");
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
+					}
 				}
 				else
 				{
-					Date Date1 = new Date();
-					Date1.dateCalc(dateString, "fr-FR");
+					Date Date2 = new Date();
+					try
+					{
+						Date2.dateCalc(dateString, "fr-FR");
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
+					}
 				}
 
 				/*Time cal*/
@@ -82,15 +105,29 @@ public class Program
 				if (timeChoice == "12")
 				{
 					Time Time1 = new Time();
+					try {
 					Time1.timeCalc(timeString);
+					} catch (Exception e){
+						Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
+					}	
 				} /*Close timeChoice IF*/
 				/*This is messy casue I was just tryin to hack it out haven't come back through to clean it up yet*/
 				else
 				{
 					Time Time2 = new Time();
+					try {
 					Time2.timeCalc(timeString);
+					} catch (Exception e){
+						Console.WriteLine("PROGRAM CRAHSED DUE TO IMPROPER INPUT VALUES", e);
+					}
+
 				}
 			} //Close DateTime IF
+			loopCount++;
+			Console.WriteLine();
+			Console.Write("You have gone thorugh this program {0} time(s)", loopCount);
+			Console.WriteLine();
+			
 		} //Close Global WHILE
 
 		Console.Write("----------ENDED----------");
